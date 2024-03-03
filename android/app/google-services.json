@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "877241651124",
+    "project_id": "serene-flutter-project",
+    "storage_bucket": "serene-flutter-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877241651124:android:49db2cb99cab98d6192ce1",
+        "android_client_info": {
+          "package_name": "com.empowherhacks.serene"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABhrNpErpZgH5mMO6y95RUfaG7aFAOhf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
