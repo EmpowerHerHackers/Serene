@@ -45,5 +45,17 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to your location to provide personalized content based on where you are.</string>
+<!-- This message is shown to users when the app requests permission to access their location while the app is in use. It explains why the app needs access to location data. -->
+
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need access to your location to provide personalized content based on where you are, even when the app is in the background.</string>
+<!-- This message is shown when the app requests permission to access the user's location at all times, including when the app is not in use. It's important for features that require location tracking in the background. -->
+
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need access to your location to provide personalized content based on where you are, even when the app is in the background.</string>
+<!-- Required by iOS 11 and later, this message is shown as part of the permission request process when the app seeks to obtain both when-in-use and always location permission. It provides a more detailed explanation, especially for background location access. -->
+
 </dict>
 </plist>

@@ -3,9 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  cloud_firestore  # added the Firestore plugin for Flutter, enabling database operations.
   firebase_auth
   firebase_core
   firebase_storage
+  geolocator_windows # included geolocation support specifically for the Windows platform.
   smart_auth
 )
 

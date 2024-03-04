@@ -14,13 +14,14 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
+/// 
 class DefaultFirebaseOptions {
+  // this getter dynamically selects the correct Firebase configuration
+  // based on the platform the Flutter app is running on.
   static FirebaseOptions get currentPlatform {
+    // checks if the app is running on a web platform.
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web; // if it's web, return the Firebase configuration for web.
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -48,6 +49,15 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: "AIzaSyAnKzRFutyAdi-yL3_U_wrGmixDVecCew0",
+    authDomain: "serene-flutter-project.firebaseapp.com",
+    projectId: "serene-flutter-project",
+    storageBucket: "serene-flutter-project.appspot.com",
+    messagingSenderId: "877241651124",
+    appId: "1:877241651124:web:f7071ec4b426a9eb192ce1"
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyABhrNpErpZgH5mMO6y95RUfaG7aFAOhf8',

@@ -10,6 +10,9 @@ import 'package:serene/food_layout/Presentation/Base/food_item.dart';
 import 'package:serene/food_layout/Presentation/Models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; 
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -20,6 +23,72 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int selectedCategoryIndex = 0;
+  // initial state setting for current address display.
+  String currentAddress = "Fetching location...";
+  // Firebase Firestore instance for database operations.
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // Firebase Auth instance for authentication operations.
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    getLocationUpdates(); // call to start listening for location updates.
+  }
+
+  // asynchronously requests location updates and handles permissions.
+  Future<void> getLocationUpdates() async {
+    // checks if location services are enabled on the device.
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() => currentAddress = "Location services are disabled.");
+      return;
+    }
+     // request location permissions from the user.
+    LocationPermission permission = await Geolocator.checkPermission();
+    // handle cases where location permissions are denied forever.
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse && permission != LocationPermission.always) {
+        setState(() => currentAddress = "Location permissions are denied.");
+        return;
+      }
+    }
+    
+    if (permission == LocationPermission.deniedForever) {
+      setState(() => currentAddress = "Location permissions are permanently denied.");
+      return;
+    }
+    // listen for location updates and update the current address.
+    Geolocator.getPositionStream().listen((Position position) {
+      setState(() {
+        currentAddress = "${position.latitude}, ${position.longitude}";
+      });
+      uploadLocation(position);
+    });
+  }
+   // uploads the given location to Firestore under the user's ID.
+  Future<void> uploadLocation(Position position) async {
+    String userId = _auth.currentUser?.uid ?? 'anonymous';  // get the current user's ID.
+    if (userId == 'anonymous') {
+      print("No signed-in user available for fetching UID");
+      return;
+    }
+    // attempts to update the user's location in Firestore.
+    try {
+      await _firestore.collection('locations').doc(userId).set({
+        'latitude': position.latitude,
+        'longitude': position.longitude,
+        'timestamp': FieldValue.serverTimestamp(), // uses server-side timestamp for consistency.
+      }, SetOptions(merge: true)); // merges with existing data to avoid overwriting.
+      print("Location updated in Firestore for user $userId");
+    } catch (e) {
+      print("Error updating location in Firestore: $e"); // log any errors that may occur.
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -76,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               const Gap(8),
                               Text(
-                                "New York City",
+                                currentAddress,
                                 style: TextStyles.bodyMediumSemiBold.copyWith(
                                     color: Colors.white,
                                     fontSize: getFontSize(FontSizes.medium)),
