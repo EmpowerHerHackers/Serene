@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!-- Grants the app access to the device's precise location using GPS and other location services. This permission is required for features that need to determine the user's exact position. -->
+
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<!-- Grants the app access to the device's approximate location derived from network sources such as cell towers and Wi-Fi. This permission is used for location-based services that do not require the user's exact position. -->
+
     <application
         android:label="serene"
         android:name="${applicationName}"

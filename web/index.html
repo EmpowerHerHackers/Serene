@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
+<!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -32,17 +32,36 @@
   <title>serene</title>
   <link rel="manifest" href="manifest.json">
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnKzRFutyAdi-yL3_U_wrGmixDVecCew0",
+      authDomain: "serene-flutter-project.firebaseapp.com",
+      projectId: "serene-flutter-project",
+      storageBucket: "serene-flutter-project.appspot.com",
+      messagingSenderId: "877241651124",
+      appId: "1:877241651124:web:f7071ec4b426a9eb192ce1"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
-  <!-- This script adds the flutter initialization JS code -->
+<!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
 <body>
   <script>
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
+// Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
