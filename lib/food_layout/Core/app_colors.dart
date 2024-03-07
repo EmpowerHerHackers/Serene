@@ -30,6 +30,10 @@ class Pallete{
   static const Color neutral90 = Color(0xFF3F3939);
   static const Color neutral100 = Color(0xFF0F0F0F);
 
+  static var purplePrimary;
+
+  static var lightPurple;
+
 
 
 
