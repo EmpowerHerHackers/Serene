@@ -28,6 +28,10 @@ Enable a woman in a dangerous situation or allies witnessing a potentially dange
 - Serene's UI Mockup/Wireframe on Figma:
     https://www.figma.com/file/PunYTAg2usnOoTpCsxCjZw/Baddies-in-Tech-Buildathon-2024?type=design&node-id=1-312&mode=design&t=JF5QzOZiZtZoB2tP-0  
 
+### Demo Video:
+- Serene's walkthrough video on loom:
+https://www.loom.com/share/c9b74b046b8e4ad6aaf684d63c9a6b17?sid=ea501ef3-7d4b-4164-84df-1fa789f86b2a
+
 *Additional Considerations:*
 
 *The dynamic UI changes should be predictable and intuitive within a defined framework, allowing users to adapt quickly and recognize the key functionalities regardless of the specific layout or visual elements.*
